@@ -1,2 +1,2 @@
 
-#Web DEvelopment Boot Camp - AppBrewery
+#Web Development Boot Camp - AppBrewery

@@ -1,26 +1,31 @@
 body {
   margin: 0px;
   text-align: center;
-  font-family: Verdana, sans-serif;
   font-family: "Merriweather", serif;
+  font-size: large;
 }
 div {
-  background-color: #dae1e7;
+  /* background-color: #dae1e7; */
 }
 h1 {
-  margin-top: 0;
-  color: #142850;
+  margin: 50px auto 0 auto;
+  color: #66bfbf;
   font-family: "Sacramento", cursive;
-  font-size: 250%;
+  font-size: 5.625rem;
 }
 h2 {
+  margin-top: 4px;
   font-family: "Montserrat", sans-serif;
+  font-weight: normal;
+  font-size: 2.5rem;
+  color: #66bfbf;
+  line-height: 2;
 }
 h3 {
   font-family: "Montserrat", sans-serif;
+  color: #11999e;
 }
 p {
-  color: #142850;
 }
 .top-container {
   background-color: #dae1e7;
@@ -49,4 +54,8 @@ p {
   width: 350px;
   height: 450px;
   border-radius: 40%;
+}
+
+a {
+  color: #11999e;
 }

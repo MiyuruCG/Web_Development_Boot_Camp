@@ -1,4 +1,4 @@
-
+//event listeners ....................
 //detecting button press
 var btn = document.querySelectorAll("button");
 
@@ -8,6 +8,7 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
 
         var buttonInnerHtml = this.innerHTML;
         makeSound(buttonInnerHtml);
+        buttonAnimation(buttonInnerHtml);
     });
 }
 
@@ -16,7 +17,23 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
 document.addEventListener("keydown", function (event) {
 
     makeSound(event.key);
+    buttonAnimation(event.key);
 });
+
+
+
+//functions...............................................................
+
+function buttonAnimation(currentKey) {
+
+    var activeBtn = document.querySelector("." + currentKey);
+    activeBtn.classList.add("pressed");
+
+    setTimeout(function () {
+        activeBtn.classList.remove("pressed");
+    }, 100);
+
+}
 
 //looking for the sound 
 function makeSound(value) {

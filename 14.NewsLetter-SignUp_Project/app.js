@@ -38,10 +38,10 @@ app.post("/", function (req, res) {
     var jsonData = JSON.stringify(data);
 
     var url = "https://us10.api.mailchimp.com/3.0/lists/8a1da344e8"
-
+    var apiKey = ""; //Generate new key in  Mailchimp
     const options = {
         method: "POST",
-        auth: "mcg:4b360528fb077336ddc7901f301af040-us10"
+        auth: "mcg:" + apiKey
     }
 
     const request = https.request(url, options, function (response) {
@@ -70,13 +70,9 @@ app.post("/failure", function (req, res) {
 //--data '{"name":"Freddie'\''s Favorite Hats","contact":{"company":"Mailchimp","address1":"675 Ponce De Leon Ave NE","address2":"Suite 5000","city":"Atlanta","state":"GA","zip":"30308","country":"US","phone":""},"permission_reminder":"You'\''re receiving this email because you signed up for updates about Freddie'\''s newest hats.","campaign_defaults":{"from_name":"Freddie","from_email":"freddie@freddiehats.com","subject":"","language":"en"},"email_type_option":true}' \
 
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
     console.log("Server running in port 3000");
 
 })
 
 
-//api key
-// 4b360528fb077336ddc7901f301af040-us10
-//list id
-//8a1da344e8

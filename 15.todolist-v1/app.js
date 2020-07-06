@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const date = require(__dirname + "/date.js");
 
 const app = express();
 
-var items = ["Buy food", "Cook food"];
-let workItems = [];
+const items = ["Buy food", "Cook food"];
+const workItems = [];
 //tells the app to use ejs as there view engine 
 app.set('view engine', 'ejs');
 
@@ -14,16 +15,7 @@ app.use(express.static("public"));
 
 app.get("/", function (reqS, res) {
 
-    var today = new Date();
-
-    var options = {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long'
-    };
-
-    var day = today.toLocaleDateString("en-US", options);
-
+    let day = date.getDate();
     res.render("list", { listTitle: day, newListItems: items }); //look in the views folder for a file named "list"... then it will look for kindOfDay and assigns day.
 });
 

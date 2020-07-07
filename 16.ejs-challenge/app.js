@@ -24,8 +24,15 @@ app.get("/", function (req, res) {
   res.render("home", { homeContent: homeStartingContent, posts: posts });
 });
 
-app.get("/:topic", function (req, res) {
-  console.log(req.params.topic);
+app.get("/posts/:topic", function (req, res) {
+  const requestedTitle = req.params.topic;
+
+  posts.forEach(function name(post) {
+    const stordeTitle = post.title;
+    if (stordeTitle === requestedTitle) {
+      console.log("Match found");
+    }
+  });
 
 });
 

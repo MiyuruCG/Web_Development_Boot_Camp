@@ -36,7 +36,7 @@ app.get("/compose", function (req, res) {
 });
 
 app.post("/compose", function (req, res) {
-  var val = req.body.textField;
+  var val = req.body.titleTxt;
 
   console.log(val);
 

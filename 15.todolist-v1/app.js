@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 
-app.get("/", function (reqS, res) {
+app.get("/", function (req, res) {
 
     let day = date.getDate();
     res.render("list", { listTitle: day, newListItems: items }); //look in the views folder for a file named "list"... then it will look for kindOfDay and assigns day.

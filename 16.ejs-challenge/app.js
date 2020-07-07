@@ -30,10 +30,11 @@ app.get("/posts/:topic", function (req, res) {
 
   posts.forEach(function name(post) {
     const stordeTitle = _.lowerCase(post.title);
+
     if (stordeTitle === requestedTitle) {
-      console.log("Match found");
-    } else {
-      console.log("Not a Match");
+      console.log(stordeTitle);
+      console.log(requestedTitle);
+      res.render("post", { title: post.title, body: post.body });
     }
   });
 

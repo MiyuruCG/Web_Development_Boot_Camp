@@ -9,8 +9,15 @@ mongoose.connect("mongodb://localhost:27017/fruitsDB", { useNewUrlParser: true, 
 
 //create new schema (Blueprints of the )
 const fruitSchema = new mongoose.Schema({
-    name: String,
-    rating: Number,
+    name: {
+        type: String,
+        required: [true, "Please Add a name"]
+    },
+    rating: {
+        type: Number,
+        min: 1,
+        max: 10
+    },
     review: String
 });
 
@@ -21,11 +28,11 @@ const Fruit = mongoose.model("Fruit", fruitSchema);
 const fruit = new Fruit({
     name: "Apple",
     rating: 7,
-    review: "good"
+    review: "good fruit"
 });
 
 // //saves the fruit document inside the fruits Collection in the fruitDB
-// //fruit.save();
+fruit.save();
 
 
 //mongoose.connect("mongodb://localhost:27017/personDB", { useNewUrlParser: true, useUnifiedTopology: true });
@@ -38,23 +45,23 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model("Person", personSchema);
 
 const person = new Person({
-    name: "Jhon",
+    name: "John",
     age: 37
 });
 
 //person.save();
 
-const mango = new Fruit({
-    name: "mango",
-    rating: 7,
-    review: "good"
-});
+// const mango = new Fruit({
+//     name: "mango",
+//     rating: 7,
+//     review: "good"
+// });
 
-const orange = new Fruit({
-    name: "orange",
-    rating: 7,
-    review: "good"
-});
+// const orange = new Fruit({
+//     name: "orange",
+//     rating: 7,
+//     review: "good"
+// });
 
 // Fruit.insertMany([mango, orange], function (err) {
 //     if (err) {

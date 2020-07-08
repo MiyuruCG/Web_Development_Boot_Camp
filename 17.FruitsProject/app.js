@@ -42,7 +42,7 @@ const person = new Person({
     age: 37
 });
 
-person.save();
+//person.save();
 
 const mango = new Fruit({
     name: "mango",
@@ -56,22 +56,30 @@ const orange = new Fruit({
     review: "good"
 });
 
-Fruit.insertMany([mango, orange], function (err) {
+// Fruit.insertMany([mango, orange], function (err) {
+//     if (err) {
+//         console.log(err);
+
+//     } else {
+//         console.log("Saved success");
+
+//     }
+// });
+
+Fruit.find(function (err, fruits) {
     if (err) {
         console.log(err);
 
     } else {
-        console.log("Saved success");
+        //close db connection
+        mongoose.connection.close();
 
+        fruits.forEach(function (fruit) {
+            console.log(fruit.name);
+        });
     }
+
 });
-
-
-
-
-
-
-
 
 
 

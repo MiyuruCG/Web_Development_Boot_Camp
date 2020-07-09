@@ -48,9 +48,9 @@ app.route("/articles")
 
         newArticle.save(function (err) {
             if (err) {
-                console.log(err);
+                res.send(err);
             } else {
-                console.log("Save successful");
+                res.send("Save successful");
 
             }
         });

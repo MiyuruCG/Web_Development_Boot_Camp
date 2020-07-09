@@ -11,7 +11,7 @@ mongoose.connect("mongodb://localhost:27017/fruitsDB", { useNewUrlParser: true, 
 const fruitSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "Please Add a name"]
+        //required: [true, "Please Add a name"]
     },
     rating: {
         type: Number,
@@ -26,13 +26,13 @@ const Fruit = mongoose.model("Fruit", fruitSchema);
 
 //create new fruit document
 const fruit = new Fruit({
-    name: "Apple",
+    //name: "Apple",
     rating: 7,
-    review: "good fruit"
+    review: "..... fruit"
 });
 
 // //saves the fruit document inside the fruits Collection in the fruitDB
-fruit.save();
+//fruit.save();
 
 
 //mongoose.connect("mongodb://localhost:27017/personDB", { useNewUrlParser: true, useUnifiedTopology: true });
@@ -73,6 +73,7 @@ const person = new Person({
 //     }
 // });
 
+//reading db
 Fruit.find(function (err, fruits) {
     if (err) {
         console.log(err);
@@ -88,11 +89,33 @@ Fruit.find(function (err, fruits) {
 
 });
 
+// //updating db 
+// Fruit.updateOne({ _id: "5f05c98e63f6cae7672631eb" }, { name: "Banana" }, function (err) {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log("Update successful");
+//     }
 
+// });
 
+// //Delete 
+// Fruit.deleteOne({ _id: "5f05c98e63f6cae7672631eb" }, function (err) {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log("Deleted Successfully");
+//     }
+// });
 
-
-
+//Delete many
+// Person.deleteMany({ name: "John" }, function (err) {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log("Deleted all the documents");
+//     }
+// });
 
 
 //------------------------      Creating and connecting to db

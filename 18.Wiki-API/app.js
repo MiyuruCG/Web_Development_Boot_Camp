@@ -21,6 +21,8 @@ const articleSchema = {
 //article model
 const Article = mongoose.model("Article", articleSchema);
 
+// --------------------------- Requests targeting specific article -----------------------------------
+
 //Chained routing 
 app.route("/articles")
 
@@ -63,6 +65,70 @@ app.route("/articles")
             }
         });
     });
+
+// --------------------------- Requests targeting specific article -----------------------------------
+
+app.route("/articles/:articleTitle")
+
+    .get(function (req, res) {
+        Article.findOne({ title: req.params.articleTitle }, function (err, foundArticle) {
+            if (foundArticle) {
+                res.send(foundArticle);
+            } else {
+                res.send("No articles were found in that name");
+            }
+        });
+    })
+
+    .put(function (req, res) { //updates the specific resource and override the whole doc 
+        Article.update(
+            { title: req.params.articleTitle },
+            { title: req.body.title, content: req.body.content },
+            { overwrite: true }, //otherwise mongoose will prevent overriding
+            function (err) {
+                if (!err) {
+                    res.send("Successfully Updated");
+                } else {
+                    res.send(err);
+
+                }
+            }
+        );
+    })
+
+    .patch(function (req, res) {  //updates the specific resources specific part without overriding the whole doc 
+
+        Article.update(
+            { title: req.params.articleTitle },
+            { $set: req.body },
+            function (err) {
+                if (!err) {
+                    res.send("Successfully Updated Article");
+                } else {
+                    res.send(err);
+                }
+            }
+        );
+    })
+
+    .delete(function (req, res) {
+        Article.deleteOne(
+            { title: req.params.articleTitle },
+            function (err) {
+                if (!err) {
+                    res.send("Deleted Successfully");
+                } else {
+                    res.send(err);
+                }
+            }
+        );
+    });
+
+
+
+
+
+
 
 // //GET all (Read from DB)
 // app.get("/articles", function (req, res) {

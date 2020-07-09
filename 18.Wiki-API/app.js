@@ -35,6 +35,24 @@ app.get("/articles", function (req, res) {
     });
 });
 
+//POST 
+app.post("/articles", function (req, res) {
+
+    const newArticle = new Article({
+        title: req.body.title,
+        content: req.body.content
+    });
+
+    newArticle.save(function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Save successful");
+
+        }
+    });
+});
+
 
 //
 app.listen(3000, function () {

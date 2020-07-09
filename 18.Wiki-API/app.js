@@ -21,6 +21,19 @@ const articleSchema = {
 //article model
 const Article = mongoose.model("Article", articleSchema);
 
+//GET all (Read from DB)
+app.get("/articles", function (req, res) {
+    //query DB
+    Article.find(function (err, allArticles) {
+        if (err) {
+            console.log(err);
+
+        } else {
+            // console.log(allArticles);
+            res.send(allArticles);
+        }
+    });
+});
 
 
 //

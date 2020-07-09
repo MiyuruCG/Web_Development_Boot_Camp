@@ -21,48 +21,91 @@ const articleSchema = {
 //article model
 const Article = mongoose.model("Article", articleSchema);
 
-//GET all (Read from DB)
-app.get("/articles", function (req, res) {
-    //query DB
-    Article.find(function (err, allArticles) {
-        if (err) {
-            console.log(err);
+//Chained routing 
+app.route("/articles")
 
-        } else {
-            // console.log(allArticles);
-            res.send(allArticles);
-        }
+    .get(function (req, res) {
+        //query DB
+        Article.find(function (err, allArticles) {
+            if (err) {
+                console.log(err);
+
+            } else {
+                // console.log(allArticles);
+                res.send(allArticles);
+            }
+        });
+    })
+
+    .post(function (req, res) {
+
+        const newArticle = new Article({
+            title: req.body.title,
+            content: req.body.content
+        });
+
+        newArticle.save(function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Save successful");
+
+            }
+        });
+    })
+
+    .delete(function (req, res) {
+        Article.deleteMany(function (err) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send("Deleted All articles");
+            }
+        });
     });
-});
 
-//POST 
-app.post("/articles", function (req, res) {
+// //GET all (Read from DB)
+// app.get("/articles", function (req, res) {
+//     //query DB
+//     Article.find(function (err, allArticles) {
+//         if (err) {
+//             console.log(err);
 
-    const newArticle = new Article({
-        title: req.body.title,
-        content: req.body.content
-    });
+//         } else {
+//             // console.log(allArticles);
+//             res.send(allArticles);
+//         }
+//     });
+// });
 
-    newArticle.save(function (err) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("Save successful");
+// //POST 
+// app.post("/articles", function (req, res) {
 
-        }
-    });
-});
+//     const newArticle = new Article({
+//         title: req.body.title,
+//         content: req.body.content
+//     });
 
-//DELETE
-app.delete("/articles", function (req, res) {
-    Article.deleteMany(function (err) {
-        if (err) {
-            res.send(err);
-        } else {
-            res.send("Deleted All articles");
-        }
-    });
-});
+//     newArticle.save(function (err) {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             console.log("Save successful");
+
+//         }
+//     });
+// });
+
+// //DELETE
+// app.delete("/articles", function (req, res) {
+//     Article.deleteMany(function (err) {
+//         if (err) {
+//             res.send(err);
+//         } else {
+//             res.send("Deleted All articles");
+//         }
+//     });
+// });
 
 
 //

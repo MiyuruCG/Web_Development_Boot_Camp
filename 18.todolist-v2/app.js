@@ -70,13 +70,22 @@ app.get("/", function (req, res) {
 app.post("/", function (req, res) {
 
   const itemName = req.body.newItem;
+  const listName = req.body.list;
 
   const newItemDoc = new Item({
     name: itemName
   });
 
-  newItemDoc.save();
-  res.redirect("/");
+  if (listName === "Today") {
+    newItemDoc.save;
+    res.redirect("/");
+  } else {
+    List.findOne({ name: listName }, function (err, foundList) {
+      foundList.items.push(newItemDoc);
+      foundList.save();
+      res.redirect("/" + listName);
+    });
+  }
 
 });
 
@@ -91,6 +100,7 @@ app.post("/delete", function (req, res) {
       console.log("Item Deleted");
       res.redirect("/")
     }
+
   });
 });
 
@@ -105,6 +115,7 @@ app.route("/:customList")
     const customListName = req.params.customList;
 
     List.findOne({ name: customListName }, function (err, foundList) {
+
       if (!err) {
         if (foundList) {//show existing list
 
@@ -117,14 +128,14 @@ app.route("/:customList")
           const list = new List({
             name: customListName,
             items: defaultItems
-
           });
+
           list.save();
           res.redirect("/" + customListName);
         }
+
       } else {
         console.log("Error occurred :: " + err);
-
       }
 
     });

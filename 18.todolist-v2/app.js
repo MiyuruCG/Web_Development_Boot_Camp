@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todoListDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://Admin-mcg:miyuru2017@cluster0.pcryi.mongodb.net/todoListDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
 //create schema
 const itemsSchema = {
@@ -129,7 +129,7 @@ app.post("/delete", function (req, res) {
         console.log(err);
 
       } else {
-        console.log("Item Deleted");
+        //console.log("Item Deleted");
         res.redirect("/")
       }
 
@@ -170,7 +170,7 @@ app.route("/:customList")
       if (!err) {
         if (foundList) {//show existing list
 
-          console.log("There's already a list ");
+          //console.log("There's already a list ");
           res.render("list", { listTitle: foundList.name, newListItems: foundList.items })
 
         } else {//create a new list 
